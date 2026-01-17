@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/db";
 import QRCode from "qrcode";
 
 export async function GET(
@@ -37,7 +37,7 @@ export async function GET(
       },
     });
 
-    return new NextResponse(new Uint8Array(qrBuffer), {
+    return new NextResponse(qrBuffer, {
       status: 200,
       headers: {
         "Content-Type": "image/png",
