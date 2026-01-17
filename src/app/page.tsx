@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
+import { PrintableQR } from "@/components/PrintableQR";
 
 interface Note {
   id: string;
@@ -103,14 +104,7 @@ export default function Home() {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-slate-50 to-slate-100">
         {/* Print-only view */}
-        <div className="print-only hidden print:flex print:flex-col print:items-center print:justify-center print:min-h-screen">
-          <img
-            src={`/api/notes/${createdNote.id}/qr`}
-            alt="QR Code"
-            className="w-64 h-64"
-          />
-          <p className="mt-4 text-lg font-medium text-center">{label}</p>
-        </div>
+        <PrintableQR noteId={createdNote.id} label={label} />
 
         {/* Screen view */}
         <Card className="w-full max-w-md print:hidden">
