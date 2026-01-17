@@ -2,10 +2,30 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
 }
+
+model Note {
+  id        String   @id @default(cuid())
+  content   String
+  label     String?  // Optional label for QR code (auto-generated if not provided)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Future: for private notes
+  // userId    String?
+  // isPublic  Boolean  @default(true)
+  // user      User?    @relation(fields: [userId], references: [id])
+}
+
+// Future: for authentication
+// model User {
+//   id        String   @id @default(cuid())
+//   email     String   @unique
+//   notes     Note[]
+// }
